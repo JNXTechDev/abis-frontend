@@ -137,24 +137,128 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5f5f5;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e8f4f8 100%);
 }
 
 .success-box {
   background: white;
   padding: 3rem 2rem;
-  border-radius: 8px;
+  border-radius: 12px;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  max-width: 500px;
+  width: 90%;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-icon {
+  font-size: 3.5rem;
+  color: #28a745;
+  margin-bottom: 1rem;
+  display: inline-block;
+  width: 70px;
+  height: 70px;
+  background: #e8f5e9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .success-box h2 {
-  color: #28a745;
+  color: #1a1a1a;
   font-size: 1.8rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-.success-box p {
+.success-box > p {
   color: #666;
   margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.tracking-info,
+.pickup-info {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  border: 1px solid #e0e0e0;
+}
+
+.tracking-label,
+.pickup-label {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.tracking-number,
+.pickup-code {
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-family: 'Courier New', monospace;
+  background: linear-gradient(135deg, #0066cc, #004999);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  word-break: break-all;
+}
+
+.tracking-hint,
+.pickup-hint {
+  color: #999;
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0 0;
+  font-style: italic;
+}
+
+.success-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.track-btn,
+.back-btn {
+  padding: 1rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s;
+  display: inline-block;
+}
+
+.track-btn {
+  background: linear-gradient(135deg, #0066cc, #004999);
+  color: white;
+}
+
+.track-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+}
+
+.back-btn {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.back-btn:hover {
+  background: #d0d0d0;
+  transform: translateY(-2px);
 }

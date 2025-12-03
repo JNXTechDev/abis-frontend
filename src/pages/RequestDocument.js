@@ -87,33 +87,14 @@ function RequestDocument() {
         pickup: formData.pickup,
       };
 
-      // Try to save to backend
-      let newDoc = null;
-      try {
-        const response = await api.post('/documents', payload);
-        newDoc = response.data;
-      } catch (apiErr) {
-        // Fallback: save to localStorage if backend fails
-        console.warn('Backend unavailable, saving to localStorage:', apiErr.message);
-        const documents = JSON.parse(localStorage.getItem('documents') || '[]');
-        const trackingNumber = `ABIS-${Date.now()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
-        const pickupCode = formData.pickup ? Math.random().toString(36).slice(2, 10).toUpperCase() : '';
-        newDoc = {
-          id: Date.now(),
-          trackingNumber,
-          requestDate: formData.requestDate,
-          ...payload,
-          pickupCode,
-          remarks: '',
-        };
-        documents.push(newDoc);
-        localStorage.setItem('documents', JSON.stringify(documents));
-      }
+      // Save to backend
+      const response = await api.post('/documents', payload);
+      const newDoc = response.data;
 
-      setSubmitted(true);
-      setTimeout(() => {
-        window.location.href = '/track/' + (newDoc.trackingNumber || newDoc.id);
-      }, 2000);
+      setSubmitted({
+        trackingNumber: newDoc.trackingNumber,
+        pickupCode: newDoc.pickupCode,
+      });
     } catch (err) {
       console.error('Submission error:', err);
       setError('Failed to submit request. Please try again.');
@@ -124,9 +105,29 @@ function RequestDocument() {
     return (
       <div className="request-success">
         <div className="success-box">
-          <h2>✓ Request Submitted Successfully!</h2>
+          <div className="success-icon">✓</div>
+          <h2>Request Submitted Successfully!</h2>
           <p>Your document request has been received.</p>
-          <p>Redirecting to tracking page...</p>
+          <div className="tracking-info">
+            <p className="tracking-label">Your Tracking Number:</p>
+            <p className="tracking-number">{submitted.trackingNumber}</p>
+            <p className="tracking-hint">Save this number to track your request</p>
+          </div>
+          {submitted.pickupCode && (
+            <div className="pickup-info">
+              <p className="pickup-label">Your Pickup Code:</p>
+              <p className="pickup-code">{submitted.pickupCode}</p>
+              <p className="pickup-hint">Use this code when picking up at the barangay hall</p>
+            </div>
+          )}
+          <div className="success-actions">
+            <Link to={`/track/${submitted.trackingNumber}`} className="track-btn">
+              Track Your Request
+            </Link>
+            <Link to="/services" className="back-btn">
+              Back to Services
+            </Link>
+          </div>
         </div>
       </div>
     );
