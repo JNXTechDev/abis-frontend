@@ -45,9 +45,9 @@ function PublicLayout({ children }) {
               <li><Link to="/admin/blotter-review">Review Blotter</Link></li>
               <li><Link to="/">View Public</Link></li>
               <li>
-                <button 
-                  onClick={handleLogoutClick} 
-                  style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer', fontSize: '16px' }}
+                <button
+                  onClick={handleLogoutClick}
+                  className="nav-logout"
                 >
                   Logout
                 </button>
