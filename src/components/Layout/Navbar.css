@@ -189,14 +189,16 @@
 }
 
 .dropdown-item.logout {
-  color: white;
-  background-color: #ef4444;
-  font-weight: 600;
+  color: white !important;
+  background-color: #dc2626 !important;
+  font-weight: 700;
+  display: block;
+  border: none;
 }
 
 .dropdown-item.logout:hover {
-  background-color: #d32f2f;
-  color: white;
+  background-color: #991b1b !important;
+  color: white !important;
 }
 
 .dropdown-divider {
