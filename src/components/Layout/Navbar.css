@@ -189,7 +189,6 @@
 }
 
 .dropdown-item.logout {
-  color: white !important;
   background-color: #dc2626 !important;
   font-weight: 700 !important;
   display: block !important;
@@ -199,7 +198,6 @@
 
 .dropdown-item.logout:hover {
   background-color: #991b1b !important;
-  color: white !important;
   text-decoration: none !important;
 }
 
