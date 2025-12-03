@@ -278,6 +278,10 @@
     font-size: 13px;
   }
 
+  .nav-links button {
+    color: red;
+  }
+
   .hero {
     min-height: 300px;
   }
