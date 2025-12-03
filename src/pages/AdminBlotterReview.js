@@ -103,7 +103,8 @@ function AdminBlotterReview() {
 
   const openViewModal = async (id) => {
     try {
-      const response = await api.get(`/blotter/${id}`);
+      // request admin-level details (includes reporter name/contact)
+      const response = await api.get(`/blotter/${id}?admin=1`);
       setViewModal(response.data);
     } catch (err) {
       alert('Failed to load blotter details: ' + (err.message || 'error'));
