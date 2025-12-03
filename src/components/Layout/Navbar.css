@@ -189,13 +189,14 @@
 }
 
 .dropdown-item.logout {
-  color: #ef4444;
+  color: white;
+  background-color: #ef4444;
   font-weight: 600;
 }
 
 .dropdown-item.logout:hover {
-  background-color: #fee;
-  color: #d32f2f;
+  background-color: #d32f2f;
+  color: white;
 }
 
 .dropdown-divider {
