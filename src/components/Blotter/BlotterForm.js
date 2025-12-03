@@ -1,27 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import api from '../../services/api';
 import './BlotterForm.css';
 
 function BlotterForm() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    date: '',
-    complainant: '',
-    respondent: '',
-    incidentType: '',
-    narrative: '',
+    title: '',
+    description: '',
+    reporterName: '',
+    reporterContact: '',
+    incidentDate: '',
     status: 'pending'
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (id) {
-      // TODO: Replace with API call
-      const blotters = JSON.parse(localStorage.getItem('blotters') || '[]');
-      const blotter = blotters.find(b => b.id === parseInt(id));
-      if (blotter) setFormData(blotter);
+      loadBlotter();
     }
   }, [id]);
+
+  const loadBlotter = async () => {
+    try {
+      setLoading(true);
+      const response = await api.get(`blotter/${id}`);
+      setFormData(response.data);
+      setError(null);
+    } catch (err) {
+      console.error('Error loading blotter:', err);
+      setError('Failed to load blotter record');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -30,50 +44,49 @@ function BlotterForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const blotters = JSON.parse(localStorage.getItem('blotters') || '[]');
-    
-    if (id) {
-      const index = blotters.findIndex(b => b.id === parseInt(id));
-      blotters[index] = { ...formData, id: parseInt(id) };
-    } else {
-      blotters.push({ ...formData, id: Date.now() });
+    try {
+      setLoading(true);
+      if (id) {
+        await api.put(`blotter/${id}`, formData);
+      } else {
+        await api.post('blotter', formData);
+      }
+      navigate('/blotter');
+    } catch (err) {
+      console.error('Error saving blotter:', err);
+      setError('Failed to save blotter record');
+      setLoading(false);
     }
-    
-    localStorage.setItem('blotters', JSON.stringify(blotters));
-    navigate('/blotter');
   };
+
+  if (loading && id) return <div className="loading">Loading...</div>;
 
   return (
     <div className="form-container">
       <h1>{id ? 'Edit' : 'New'} Blotter Record</h1>
+      {error && <div className="error-message">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Date</label>
-          <input type="date" name="date" value={formData.date} onChange={handleChange} required />
+          <label>Incident Date & Time</label>
+          <input type="datetime-local" name="incidentDate" value={formData.incidentDate} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label>Complainant Name</label>
-          <input type="text" name="complainant" value={formData.complainant} onChange={handleChange} required />
+          <label>Title</label>
+          <input type="text" name="title" value={formData.title} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label>Respondent Name</label>
-          <input type="text" name="respondent" value={formData.respondent} onChange={handleChange} required />
+          <label>Description</label>
+          <textarea name="description" value={formData.description} onChange={handleChange} rows="5" required></textarea>
         </div>
         <div className="form-group">
-          <label>Incident Type</label>
-          <select name="incidentType" value={formData.incidentType} onChange={handleChange} required>
-            <option value="">Select Type</option>
-            <option value="Dispute">Dispute</option>
-            <option value="Theft">Theft</option>
-            <option value="Assault">Assault</option>
-            <option value="Disturbance">Disturbance</option>
-          </select>
+          <label>Reporter Name</label>
+          <input type="text" name="reporterName" value={formData.reporterName} onChange={handleChange} required />
         </div>
         <div className="form-group">
-          <label>Narrative</label>
-          <textarea name="narrative" value={formData.narrative} onChange={handleChange} rows="5"></textarea>
+          <label>Reporter Contact</label>
+          <input type="text" name="reporterContact" value={formData.reporterContact} onChange={handleChange} required />
         </div>
         <div className="form-group">
           <label>Status</label>
@@ -83,7 +96,7 @@ function BlotterForm() {
             <option value="ongoing">Ongoing</option>
           </select>
         </div>
-        <button type="submit" className="btn btn-primary">Save</button>
+        <button type="submit" className="btn btn-primary" disabled={loading}>Save</button>
       </form>
     </div>
   );
