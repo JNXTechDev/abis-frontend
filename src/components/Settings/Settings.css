@@ -1,0 +1,16 @@
+.settings-container {
+  padding: 16px;
+  font-family: Arial, sans-serif;
+}
+.settings-section {
+  max-width: 720px;
+  margin: 12px auto;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+}
+.form-group { margin-bottom: 10px; display: flex; flex-direction: column; }
+.form-group label { margin-bottom: 4px; font-weight: 600; }
+.form-group input { padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+.btn-primary { background: #1976d2; color: #fff; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; }

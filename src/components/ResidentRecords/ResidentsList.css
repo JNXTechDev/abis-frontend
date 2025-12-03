@@ -1,0 +1,140 @@
+/* src/components/ResidentRecords/ResidentsList.css */
+.residents-list {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+}
+
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.list-header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #1A6E73;
+}
+
+.btn-add {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #1A6E73 0%, #2B8C91 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-block;
+}
+
+.btn-add:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(26, 110, 115, 0.2);
+}
+
+.search-box {
+  margin-bottom: 20px;
+}
+
+.search-box input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #1A6E73;
+  box-shadow: 0 0 0 3px rgba(26, 110, 115, 0.1);
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.residents-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.residents-table thead {
+  background: #f5f5f5;
+  border-bottom: 2px solid #1A6E73;
+}
+
+.residents-table th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 13px;
+  color: #1A6E73;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.residents-table td {
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+  color: #333;
+}
+
+.residents-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-edit,
+.btn-delete {
+  padding: 6px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s;
+  border-radius: 4px;
+}
+
+.btn-edit:hover {
+  background-color: #e8f5f7;
+  transform: scale(1.1);
+}
+
+.btn-delete:hover {
+  background-color: #fee;
+  transform: scale(1.1);
+}
+
+.no-data {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .residents-table th,
+  .residents-table td {
+    padding: 10px;
+    font-size: 12px;
+  }
+}

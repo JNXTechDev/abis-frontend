@@ -68,3 +68,46 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+---
+
+## Backend (Django + MongoDB)
+
+This repository now includes a minimal Django REST API scaffold in `backend/` that uses MongoDB via `djongo`.
+
+Quick setup (Python 3.10+ recommended):
+
+```powershell
+python -m venv .venv
+. .venv\Scripts\Activate.ps1
+pip install -r backend/requirements.txt
+```
+
+Set your MongoDB connection string as `MONGODB_URI` environment variable (defaults to `mongodb://localhost:27017/abisdb`). Run migrations and start server:
+
+```powershell
+cd backend
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver 0.0.0.0:8000
+```
+
+API endpoints are mounted under `/api/` (for example `http://localhost:8000/api/residents/`).
+
+The `recognize/` endpoint accepts POST image uploads (prototype placeholder) at `/api/recognize/`.
+
+---
+
+## PWA & Offline
+
+A basic service worker was added to `public/service-worker.js` and is registered in the frontend. This provides a simple offline fallback for `index.html` and static GET requests.
+
+## Chatbot & Image Recognition (prototype)
+
+- A simple rule-based chatbot component lives at `src/components/Chatbot/Chatbot.js`.
+- A frontend image upload prototype is available at `src/components/ResidentRecords/ImageRecognition.js` that posts images to `/api/recognize/`.
+
+## Notes
+
+Many advanced features mentioned in the thesis (face recognition, robust offline sync, GIS integration) are scaffolds/placeholders in this commit. Implementing production-ready face recognition or an English-Tagalog NLP chatbot will require additional services or libraries (examples: `face_recognition`, TensorFlow, Dialogflow, or a hosted NLP API) and is recommended as follow-up tasks.
+

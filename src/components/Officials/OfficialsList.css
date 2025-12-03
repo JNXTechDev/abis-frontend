@@ -1,0 +1,21 @@
+.officials-list-container {
+  padding: 16px;
+  font-family: Arial, sans-serif;
+}
+.officials-list-container .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th, .table td {
+  padding: 8px;
+  border: 1px solid #e0e0e0;
+}
+.btn-primary { background: #1976d2; color: #fff; padding: 6px 10px; border-radius: 4px; border: none; }
+.btn-warning { background: #f57c00; color: #fff; }
+.btn-danger { background: #d32f2f; color: #fff; }

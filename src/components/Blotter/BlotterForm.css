@@ -1,0 +1,24 @@
+.form-container {
+  max-width: 720px;
+  margin: 16px auto;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 6px;
+  font-family: Arial, sans-serif;
+}
+.form-container h1 { margin-bottom: 12px; font-size: 1.25rem; }
+.form-group { margin-bottom: 10px; display: flex; flex-direction: column; }
+.form-group label { margin-bottom: 4px; font-weight: 600; }
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group input[type="tel"],
+.form-group select,
+.form-group textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+textarea { resize: vertical; }
+.btn-primary { background: #1976d2; color: #fff; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; }
